@@ -20,7 +20,7 @@ class PredictPipelineConfig:
 
 class PredictPipeline:   
     def __init__(self):
-        print("initialize the object")
+        logging.info("initialize the object")
         self.predict_pipeline_config = PredictPipelineConfig()
 
     def predict(self,features):
