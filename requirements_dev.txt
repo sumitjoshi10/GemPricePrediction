@@ -8,6 +8,7 @@ dvc
 ipykernel
 xgboost
 dill
+dagshub
 
 # -e .
 

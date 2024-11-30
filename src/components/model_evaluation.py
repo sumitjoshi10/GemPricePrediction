@@ -1,19 +1,20 @@
 import os
 import sys
 import mlflow
+import mlflow.models
 import mlflow.sklearn
 import numpy as np
-import dill
 
 from src.utils.utils import load_object
+from src.logger import logging
+from src.exception import CustomeException
 
 from urllib.parse import urlparse
 from sklearn.metrics import mean_squared_error,mean_absolute_error,r2_score
 
-from src.logger import logging
-from src.exception import CustomeException
-
 from dataclasses import dataclass
+
+
 
 @dataclass
 class ModelEvaluationConfig:
@@ -27,7 +28,7 @@ class ModelEvaulation:
     def eval_metrics(self,actual,pred):
         rmse = np.sqrt(mean_squared_error(actual, pred))# here is RMSE
         mae = mean_absolute_error(actual, pred)# here is MAE
-        r2 = r2_score(actual, pred)# here is r3 value
+        r2 = r2_score(actual, pred)# here is r2 value
         logging.info("evaluation metrics captured")
         return rmse, mae, r2
     
@@ -38,18 +39,25 @@ class ModelEvaulation:
 
             model=load_object(file_path=self.model_evaluation_config.model_path)
 
-            mlflow.set_registry_uri(uri="http://127.0.0.1:8080")  #Uncomment this line if you want if different Cloud eg S3 Bucket
-             
+            # mlflow.set_registry_uri(uri="http://127.0.0.1:8080")  #Uncomment this line if you want if different Cloud eg S3 Bucket
+            mlflow.set_registry_uri(uri="https://dagshub.com/sumit.joshi9818/GemPricePrediction.mlflow")  # Dagshub
+            
             logging.info("model has register")
             
             tracking_url_type_store=urlparse(mlflow.get_tracking_uri()).scheme
             print(tracking_url_type_store)
+       
+            
+            
+
+
 
             with mlflow.start_run():
 
                 prediction=model.predict(X_test)
 
                 (rmse,mae,r2)=self.eval_metrics(y_test,prediction)
+                
 
                 mlflow.log_metric("rmse", rmse)
                 mlflow.log_metric("r2", r2)

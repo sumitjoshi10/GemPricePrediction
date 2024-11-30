@@ -1,1 +1,6 @@
 /raw.csv
+/test.csv
+/train.csv
+/preprocessor.pkl
+/model.pkl
+/model_score.csv

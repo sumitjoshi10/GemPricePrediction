@@ -1,0 +1,15 @@
+artifact_uri: file:///E:/Personal%20Files/Learning%20Programming/Data%20Science/Projects/GemPricePrediction/mlruns/0/3be610cd111c4e94a1815f53eb9bf17c/artifacts
+end_time: 1732852007606
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 3be610cd111c4e94a1815f53eb9bf17c
+run_name: traveling-deer-458
+run_uuid: 3be610cd111c4e94a1815f53eb9bf17c
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1732852003442
+status: 3
+tags: []
+user_id: SUMIT
